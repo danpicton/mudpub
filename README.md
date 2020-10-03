@@ -1,4 +1,4 @@
-# Unnamed Markdown Note Publisher
+# mudpub - Markdown Note Publisher
 Copies and modifies markdown notes to publish to a [GoHugo](https://gohugo.io) static site.
 
 Assumes:
