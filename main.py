@@ -20,6 +20,7 @@ def main():
 
     mdp = markdownpage.MarkdownPage(parseme)
     mdp.build_file_model()
+    mdp.convert_file_model()
 
     #output exceptions
 
