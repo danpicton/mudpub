@@ -11,16 +11,19 @@ PUBLISH_DIRS = ["/home/dan/Documents/pkm/ever-nearly-ready"]
 
 
 def main():
+    pages = []
     # parseme = "/home/dan/Documents/pkm/ever-nearly-ready/Disco.md"  # no yaml
-    parseme = "/home/dan/Documents/pkm/ever-nearly-ready/Landscaping my website.md"  # valid
+    parseme = ["/home/dan/Documents/pkm/ever-nearly-ready/Landscaping my website.md",
+               "/home/dan/Documents/pkm/ever-nearly-ready/Digital Gardens.md"]  # valid
     # parseme = "/home/dan/Documents/Dan Test.md"
 
     logging.basicConfig( level=logging.INFO)
     logging.info("Starting main")
-
-    mdp = markdownpage.MarkdownPage(parseme)
-    mdp.build_file_model()
-    mdp.convert_file_model()
+    for md in parseme:
+        mdp = markdownpage.MarkdownPage(md)
+        mdp.build_file_model()
+        pages.append(mdp)
+        # mdp.convert_file_model()
 
     #output exceptions
 
