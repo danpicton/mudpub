@@ -10,7 +10,8 @@ class Reference:
     ref_target: str
         The target of the reference
     """
-    VALID_LOCAL_FILE_SUFFIXES = ["md", "txt", "html", "png", "jpg", "jpeg", "gif", "pdf", "csv"]
+    VALID_LOCAL_FILE_SUFFIXES = ["." + suffix for suffix in ["md", "txt", "html", "png", "jpg",
+                                                             "jpeg", "gif", "pdf", "csv"]]
 
     def __init__(self, link_element: etree._Element):
         self.ref_target = ""
@@ -25,13 +26,12 @@ class Reference:
     def is_local_ref(self):
         # valid suffix and doesn't start http...
         http_pattern = r"https?://.*"
-        suffix_pattern = r".*\.(.*)$"
 
         if re.match(http_pattern, self.ref_target):
             return False
 
-        link_suffix = re.search(suffix_pattern, self.ref_target)
-        if link_suffix.group(1) not in self.VALID_LOCAL_FILE_SUFFIXES:
+        link_suffix = os.path.splitext(os.path.basename(self.ref_target))[1]
+        if link_suffix not in self.VALID_LOCAL_FILE_SUFFIXES:
             return False
 
         return True
