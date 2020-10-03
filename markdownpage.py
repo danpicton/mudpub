@@ -50,12 +50,12 @@ class MarkdownPage:
         for pkm_link in self.md_links:
             if pkm_link.is_local_ref():
                 print()
-                self.replace_local_links(pkm_link)
+                self.replace_local_link(pkm_link)
 
         for pkm_image in self.md_images:
             if pkm_image.is_local_ref():
                 print()
-                self.replace_local_images(pkm_image, self.get_publish_name())
+                self.replace_local_image(pkm_image, self.get_publish_name())
         # replace local links with appropriate targets - this will be the friendly page name of the target
         # replace image references to local reference - this will get the friendly page name of the markdownpage as a parameter for a prefix to the location
         # create new friendly filename for markdownpage
@@ -118,14 +118,14 @@ class MarkdownPage:
         return os.path.splitext(filename.replace(" ", "-").lower())[0]
         # return publish_location + self.pkm_filename.replace(" ", "-").lower()
 
-    def replace_local_links(self, link_to_replace, page_slug=""):
+    def replace_local_link(self, link_to_replace, page_slug=""):
         # link_re = re.compile(re.escape(link_to_replace))
         link_re = re.escape(link_to_replace.ref_target)
         pr = link_to_replace.get_publish_ref()
         self.md_body = re.sub(link_re, pr, self.md_body, re.MULTILINE)
         print(self.md_body)
 
-    def replace_local_images(self, link_to_replace, page_slug=""):
+    def replace_local_image(self, link_to_replace, page_slug=""):
         # link_re = re.compile(re.escape(link_to_replace))
         link_re = re.escape(link_to_replace.ref_target)
         pr = link_to_replace.get_publish_ref(page_slug, True)
