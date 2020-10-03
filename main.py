@@ -40,8 +40,5 @@ def split_yaml_md():
     print(markdown.markdown(page.content))
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # page_index(PUBLISH_DIRS)
-    # split_yaml_md()
     main()
