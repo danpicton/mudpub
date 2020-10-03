@@ -4,7 +4,7 @@ import markdown
 from lxml import etree
 import link, image
 import re
-
+import os
 
 class MarkdownPage:
     """
@@ -114,7 +114,8 @@ class MarkdownPage:
 
     def get_publish_name(self):
         """Returns the slug under which page will be published """
-        return self.md_filename.replace(" ", "-").lower()
+        filename = os.path.basename(self.md_filename)
+        return os.path.splitext(filename.replace(" ", "-").lower())[0]
         # return publish_location + self.pkm_filename.replace(" ", "-").lower()
 
     def replace_local_links(self, link_to_replace, page_slug=""):
