@@ -46,4 +46,5 @@ class MarkdownBase:
             # mdp.convert_file_model()
 
     def build_publish_list(self):
-        return
+        for pub_file in [md_file for md_file in self.md_files if md_file.publish]:
+            print("publish: " + pub_file.md_filename)
