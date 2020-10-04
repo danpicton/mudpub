@@ -22,7 +22,8 @@ class MarkdownBase:
                  os.walk(self.directory) for file in filenames]
 
         for file in files:
-            print(file)
+            if file in specific_pages:
+                print(file)
 
         # for dirName, subdirList, fileList in os.walk(self.directory):
         #
