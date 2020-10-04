@@ -7,14 +7,13 @@ import frontmatter
 import markdownpage
 
 # properties
-PUBLISH_DIRS = ["/home/dan/Documents/pkm/ever-nearly-ready"]
-
+PUBLISH_ROOT = "/home/dan/Documents/pkm/ever-nearly-ready"
+FILES_TO_TEST_WITH = ["Landscaping my website.md", "Digital Gardens.md"]
 
 def main():
     pages = []
     # parseme = "/home/dan/Documents/pkm/ever-nearly-ready/Disco.md"  # no yaml
-    parseme = ["/home/dan/Documents/pkm/ever-nearly-ready/Landscaping my website.md",
-               "/home/dan/Documents/pkm/ever-nearly-ready/Digital Gardens.md"]  # valid
+    parseme = [os.path.join(PUBLISH_ROOT, f) for f in FILES_TO_TEST_WITH]  # valid
     # parseme = "/home/dan/Documents/Dan Test.md"
 
     logging.basicConfig( level=logging.INFO)
