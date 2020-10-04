@@ -3,6 +3,7 @@ import logging
 import frontmatter as frontmatter
 from bs4 import BeautifulSoup
 import markdown
+import markdownbase
 import frontmatter
 import markdownpage
 
@@ -11,6 +12,9 @@ PUBLISH_ROOT = "/home/dan/Documents/pkm/ever-nearly-ready"
 FILES_TO_TEST_WITH = ["Landscaping my website.md", "Digital Gardens.md"]
 
 def main():
+    mdb = markdownbase.MarkdownBase(PUBLISH_ROOT)
+    mdb.build_page_models(FILES_TO_TEST_WITH)
+
     pages = []
     # parseme = "/home/dan/Documents/pkm/ever-nearly-ready/Disco.md"  # no yaml
     parseme = [os.path.join(PUBLISH_ROOT, f) for f in FILES_TO_TEST_WITH]  # valid
