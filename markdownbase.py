@@ -35,9 +35,8 @@ class MarkdownBase:
         #         print(rel_file)
 
     def build_page_models(self, publish_root, file_list):
-        global PUBLISH_ROOT
 
-        parseme = [os.path.join(PUBLISH_ROOT, f) for f in file_list]  # will ultimately use all files if !file_list
+        parseme = [os.path.join(publish_root, f) for f in file_list]  # will ultimately use all files if !file_list
 
         for md in parseme:
             mdp = markdownpage.MarkdownPage(md)
