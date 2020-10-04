@@ -12,10 +12,9 @@ class MarkdownBase:
         self.dead_local_refs = {}
         # self.dead_web_refs = {}
 
-    def page_index(dir_to_index: str):
-        for dir_to_walk in dir_to_index:
-            for dirName, subdirList, fileList in os.walk(dir_to_walk):
+    def build_page_models(self, specific_pages: [str]):
+        for dirName, subdirList, fileList in os.walk(self.directory):
 
-                print('Found directory: %s' % dirName)
-                for fname in fileList:
-                    print('\t%s' % fname)
+            print('Found directory: %s' % dirName)
+            for fname in fileList:
+                print('\t%s' % fname)
