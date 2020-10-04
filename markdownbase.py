@@ -1,5 +1,6 @@
 import os
 import markdownpage
+import publishtarget
 
 class MarkdownBase:
     """
@@ -48,3 +49,7 @@ class MarkdownBase:
     def build_publish_list(self):
         for pub_file in [md_file for md_file in self.md_files if md_file.publish]:
             print("publish: " + pub_file.md_filename)
+
+    def build_publish_structure(self, pub_path: str):
+        pt = publishtarget.PublishTarget(pub_path)
+        print()
