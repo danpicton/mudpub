@@ -1,3 +1,6 @@
+import os
+
+
 class MarkdownBase:
     """
     A class representing a markdown note folder
