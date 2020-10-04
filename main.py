@@ -13,7 +13,7 @@ FILES_TO_TEST_WITH = ["Landscaping my website.md", "Digital Gardens.md"]
 
 def main():
     mdb = markdownbase.MarkdownBase(PUBLISH_ROOT)
-    mdb.build_page_models(FILES_TO_TEST_WITH)
+    mdb.index_files(FILES_TO_TEST_WITH)
 
     pages = []
     # parseme = "/home/dan/Documents/pkm/ever-nearly-ready/Disco.md"  # no yaml

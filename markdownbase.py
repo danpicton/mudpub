@@ -12,8 +12,8 @@ class MarkdownBase:
         self.dead_local_refs = {}
         # self.dead_web_refs = {}
 
-    def build_page_models(self, specific_pages: [str]):
-        for dirName, subdirList, fileList in os.walk(self.directory):
+    def index_files(self, specific_pages: [str]):
+        file_set = set()
 
             print('Found directory: %s' % dirName)
             for fname in fileList:
