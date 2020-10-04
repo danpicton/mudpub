@@ -15,7 +15,7 @@ def main():
     logging.basicConfig(level=logging.INFO)
 
     mdb = markdownbase.MarkdownBase(PUBLISH_ROOT)
-    mdb.index_files(FILES_TO_TEST_WITH)
+    mdb.index_files(FILES_TO_TEST_WITH)  # this will feed build_page_models
     mdb.build_page_models(PUBLISH_ROOT, FILES_TO_TEST_WITH)
     mdb.build_publish_list()
 
