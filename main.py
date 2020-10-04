@@ -10,6 +10,7 @@ import markdownpage
 # properties
 PUBLISH_ROOT = "/home/dan/Documents/pkm/ever-nearly-ready"
 FILES_TO_TEST_WITH = ["Landscaping my website.md", "Digital Gardens.md"]
+HUGO_GIT_PATH = "/home/dan/projects/temp_python/ape-in-progress"
 
 def main():
     logging.basicConfig(level=logging.INFO)
