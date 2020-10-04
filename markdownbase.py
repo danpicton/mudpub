@@ -1,5 +1,5 @@
 import os
-
+import markdownpage
 
 class MarkdownBase:
     """
@@ -9,6 +9,7 @@ class MarkdownBase:
     def __init__(self, directory):
         self.directory = directory
         self.md_files = []
+        self.publish_files = []
         self.dead_local_refs = {}
         # self.dead_web_refs = {}
 
@@ -19,7 +20,7 @@ class MarkdownBase:
         # https://stackoverflow.com/questions/1192978/python-get-relative-path-of-all-files-and-subfolders-in-a-directory
         files = [os.path.relpath(os.path.join(dirpath, file), self.directory) for (dirpath, dirnames, filenames) in
                  os.walk(self.directory) for file in filenames]
-]
+
         for file in files:
             print(file)
 
@@ -32,3 +33,17 @@ class MarkdownBase:
         #         file_set.add(rel_file)
         #         print('\t%s\t%s' % (dirName, fname))
         #         print(rel_file)
+
+    def build_page_models(self, publish_root, file_list):
+        global PUBLISH_ROOT
+
+        parseme = [os.path.join(PUBLISH_ROOT, f) for f in file_list]  # will ultimately use all files if !file_list
+
+        for md in parseme:
+            mdp = markdownpage.MarkdownPage(md)
+            mdp.build_file_model()
+            self.md_files.append(mdp)
+            # mdp.convert_file_model()
+
+    def build_publish_list(self):
+        return
