@@ -26,14 +26,6 @@ def main():
 
     #output exceptions
 
-def page_index(dirs_to_index: [str]):
-    for dir_to_walk in dirs_to_index:
-        for dirName, subdirList, fileList in os.walk(dir_to_walk):
-
-            print('Found directory: %s' % dirName)
-            for fname in fileList:
-                print('\t%s' % fname)
-
 
 def split_yaml_md():
 
