@@ -20,7 +20,7 @@ def main():
     mdb.index_files(FILES_TO_TEST_WITH)  # this will feed build_page_models
     mdb.build_page_models(PUBLISH_SOURCE_ROOT, FILES_TO_TEST_WITH)
     mdb.build_publish_list()
-    mdb.build_publish_structure(PUBLISH_DIRECTORY)
+    mdb.create_publish_structure(PUBLISH_DIRECTORY)
     #output exceptions
 
 
