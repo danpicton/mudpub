@@ -46,16 +46,17 @@ class MarkdownBase:
             self.md_files.append(mdp)
             # mdp.convert_file_model()
 
-    def build_publish_list(self):
-        publish_list = []
+    def build_publish_dict(self):
+        publish_dict = {} # candidate for conversion to class
         for pub_file in [md_file for md_file in self.md_files if md_file.publish]:
             print("publish: " + pub_file.get_publish_name())
-            publish_list.append(pub_file.get_publish_name())
-        return publish_list
+            publish_dict[pub_file.get_publish_name()] = pub_file.dump_markdown()
+        return publish_dict
 
-    def create_publish_structure(self, pub_path: str):
+    def publish_markdown(self, pub_path: str):
         pt = publishtarget.PublishTarget(pub_path)
-        pt.build_structure(self.build_publish_list())
-        pt.write_structure()
+        pt.define_publish_target(self.build_publish_dict())
+        pt.create_publish_structure()
+        pt.write_markdown()
         #
         print()

@@ -7,15 +7,22 @@ class PublishTarget:
 
     def __init__(self, publish_directory):
         self.publish_directory = publish_directory
-        self.subfolders = []
+        self.publish_target = {}
 
-    def build_structure(self, directory_list):
-        self.subfolders = directory_list
+    def define_publish_target(self, publish_target):
+        self.publish_target = publish_target
 
-    def write_structure(self):
+    def create_publish_structure(self):
         if not os.path.exists(self.publish_directory):
             os.mkdir(self.publish_directory)
 
-        for subfolder in self.subfolders:
-            if not os.path.exists(subfolder):
-                os.mkdir(os.path.join(self.publish_directory, subfolder))
+        for subfolder in self.publish_target.keys():
+            dir_to_create = os.path.join(self.publish_directory, subfolder)
+            if not os.path.exists(dir_to_create):
+                os.mkdir(dir_to_create)
+
+    def write_markdown(self):
+        for subfolder, md in self.publish_target.items(): # this will only work for single md files in same folder at mo
+            filename = subfolder + ".md"
+            f = open(os.path.join(self.publish_directory, subfolder, filename), "w")
+            f.write(md)
