@@ -1,4 +1,5 @@
 import frontmatter
+from frontmatter.default_handlers import YAMLHandler
 import logging
 import markdown
 from lxml import etree
@@ -80,7 +81,10 @@ class MarkdownPage:
         """Outputs front_matter_dict and markdown_body as YAML frontmatter and body content .md file."""
         # will need to build up a post object - create a new one, add content, header, etc
         # frontmatter.dumps()
-        return None
+        post = frontmatter.Post(self.md_body, None, **self.md_frontmatter)
+        dump =  frontmatter.dumps(post)
+        
+        return dump
 
     def is_valid_front_matter(self, page_to_validate: frontmatter.Post) -> bool:
         """Checks for YAML front matter and presence of REQUIRED_FRONT_MATTER_KEYS; returns false if not present."""
