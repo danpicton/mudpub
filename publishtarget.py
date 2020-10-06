@@ -22,7 +22,7 @@ class PublishTarget:
                 os.mkdir(dir_to_create)
 
     def write_markdown(self):
-        for subfolder, md in self.publish_target.items(): # this will only work for single md files in same folder at mo
+        for subfolder, md in self.publish_target.items(): # TODO: allow multiple files per publish folder
             filename = subfolder + ".md"
             f = open(os.path.join(self.publish_directory, subfolder, filename), "w")
             f.write(md)

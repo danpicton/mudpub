@@ -47,7 +47,7 @@ class MarkdownBase:
             # mdp.convert_file_model()
 
     def build_publish_dict(self):
-        publish_dict = {} # candidate for conversion to class
+        publish_dict = {} # TODO: create a PublishTarget class
         for pub_file in [md_file for md_file in self.md_files if md_file.publish]:
             print("publish: " + pub_file.get_publish_name())
             publish_dict[pub_file.get_publish_name()] = pub_file.dump_markdown()
