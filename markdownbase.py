@@ -21,7 +21,7 @@ class MarkdownBase:
         # https://stackoverflow.com/questions/1192978/python-get-relative-path-of-all-files-and-subfolders-in-a-directory
         files = [os.path.relpath(os.path.join(dirpath, file), self.directory) for (dirpath, dirnames, filenames) in
                  os.walk(self.directory) for file in filenames]
-
+        # TODO: accommodate nested dirs
         for file in files:
             if file in specific_pages:
                 print(file)

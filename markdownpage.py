@@ -118,6 +118,7 @@ class MarkdownPage:
 
     def get_publish_name(self):
         """Returns the slug under which page will be published """
+        # TODO: allow for nested dirs
         filename = os.path.basename(self.md_filename)
         return os.path.splitext(filename.replace(" ", "-").lower())[0]
         # return publish_location + self.pkm_filename.replace(" ", "-").lower()
