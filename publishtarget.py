@@ -21,8 +21,10 @@ class PublishTarget:
             if not os.path.exists(dir_to_create):
                 os.mkdir(dir_to_create)
 
+        # TODO: create attachments folder in publish target if it doesn't already exist
+
     def write_markdown(self):
-        for subfolder, md in self.publish_target.items(): # TODO: allow multiple files per publish folder
+        for subfolder, md in self.publish_target.items():
             filename = subfolder + ".md"
             f = open(os.path.join(self.publish_directory, subfolder, filename), "w")
             f.write(md)
