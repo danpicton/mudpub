@@ -97,7 +97,6 @@ class MarkdownPage:
         if re.findall(wl_re, self.md_body):
             self.parse_exceptions.append("WikiLinks in markdown body")
 
-
     def collect_references(self):
         """Populates the pkm (local) references (links and images)"""
 
