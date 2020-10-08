@@ -54,7 +54,7 @@ class MarkdownPage:
         for pkm_image in self.md_images:
             if pkm_image.is_local_ref():
                 print()
-                self.replace_local_image(pkm_image, self.get_publish_name())
+                self.replace_local_image(pkm_image, "attachments")
         # replace local links with appropriate targets - this will be the friendly page name of the target
         # replace image references to local reference - this will get the friendly page name of the markdownpage as a parameter for a prefix to the location
         # create new friendly filename for markdownpage
