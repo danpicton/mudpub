@@ -120,7 +120,6 @@ class MarkdownPage:
         # return publish_location + self.pkm_filename.replace(" ", "-").lower()
 
     def replace_local_link(self, link_to_replace, page_slug=""):
-        # TODO: add preceding to replaced links / by default
         # link_re = re.compile(re.escape(link_to_replace))
         link_re = re.escape(link_to_replace.ref_target)
         pr = link_to_replace.get_publish_ref()
@@ -128,7 +127,6 @@ class MarkdownPage:
         print(self.md_body)
 
     def replace_local_image(self, link_to_replace, page_slug=""):
-        # TODO: verify paths relative to referencing md can see images
         # link_re = re.compile(re.escape(link_to_replace))
         link_re = re.escape(link_to_replace.ref_target)
         pr = link_to_replace.get_publish_ref(page_slug, True)
