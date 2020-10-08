@@ -18,10 +18,10 @@ class Reference:
 
     def get_publish_ref(self, directory="", preserve_extension=False):
         if preserve_extension:
-            return directory + "/" + self.ref_target.replace("%20", "-").lower()
+            return os.path.join(os.path.sep, directory, self.ref_target.replace("%20", "-").lower())
         else:
             ref_prefix = os.path.splitext(self.ref_target.replace("%20", "-").lower())[0]
-            return directory + ref_prefix
+            return os.path.join(os.path.sep, directory, ref_prefix)
 
     def is_local_ref(self):
         # valid suffix and doesn't start http...
