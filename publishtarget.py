@@ -16,6 +16,9 @@ class PublishTarget:
         if not os.path.exists(self.publish_directory):
             os.mkdir(self.publish_directory)
 
+        if not os.path.exists(os.path.join(self.publish_directory, "attachments")):
+            os.mkdir(os.path.join(self.publish_directory, "attachments"))
+
         for subfolder in self.publish_target.keys():
             dir_to_create = os.path.join(self.publish_directory, subfolder)
             if not os.path.exists(dir_to_create):
