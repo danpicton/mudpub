@@ -9,6 +9,6 @@ Copies and modifies markdown notes to publish to a [GoHugo](https://gohugo.io) s
 - Publishes to Hugo's [content](https://gohugo.io/content-management/organization/) folder only (at present)
 
 ## Todo
-[checkbox:unchecked] Automate git staging
-[checkbox:unchecked] Add formatted git diffs to Chronolog
-[checkbox:unchecked] Accommodate sub-folder publish targets
+[ ] Automate git staging
+[ ] Add formatted git diffs to Chronolog
+[ ] Accommodate sub-folder publish targets
