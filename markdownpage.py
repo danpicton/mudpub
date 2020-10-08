@@ -34,7 +34,6 @@ class MarkdownPage:
         self.md_body = ""
         self.publish = False
 
-
     def build_file_model(self):
         """Reads in markdown file as MarkDownPage object"""
         # check for wikilinks and add page_exception see contains_wikilinks() below
@@ -42,7 +41,6 @@ class MarkdownPage:
         self.parse_frontmatter()
         self.check_for_wikilinks()
         self.collect_references()
-
 
     def convert_file_model(self):
         """Converts modelled markdown file to published state"""
