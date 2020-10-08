@@ -67,3 +67,6 @@ class MarkdownBase:
 
     def publish_attachments(self):
         pass
+
+    def sanitise_dead_links(self):
+        pass
