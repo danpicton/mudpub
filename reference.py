@@ -16,14 +16,28 @@ class Reference:
     def __init__(self, link_element: etree._Element):
         self.ref_target = ""
 
-    def get_publish_ref(self, directory="", preserve_extension=False):
+    def get_publish_ref(self, directory: str = "", preserve_extension: bool = False) -> str:
+        """
+        Gets publish path for Reference.
+
+        Converts to lower case; replaces spaces with hyphens.
+
+        Removes reference suffix by default.
+        """
         if preserve_extension:
             return os.path.join(os.path.sep, directory, self.ref_target.replace("%20", "-").lower())
         else:
             ref_prefix = os.path.splitext(self.ref_target.replace("%20", "-").lower())[0]
             return os.path.join(os.path.sep, directory, ref_prefix)
 
-    def is_local_ref(self):
+    def is_local_ref(self) -> bool:
+        """
+        Determines if Reference is local. Validates against accepted suffixes.
+
+        Assumes all external references start with http_pattern.
+
+        TODO: refactor to return: local, web, invalid (this will allow easier dead link cleansing)
+        """
         # valid suffix and doesn't start http...
         http_pattern = r"https?://.*"
 
