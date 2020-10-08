@@ -54,8 +54,9 @@ class MarkdownBase:
         return publish_dict
 
     def publish_markdown(self, pub_path: str):
+        publish_dict = self.build_publish_dict()
         pt = publishtarget.PublishTarget(pub_path)
-        pt.define_publish_target(self.build_publish_dict())
+        pt.define_publish_target(publish_dict)
         pt.create_publish_structure()
         pt.write_markdown()
         #
