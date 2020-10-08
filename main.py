@@ -21,6 +21,7 @@ def main():
     mdb.build_page_models(PUBLISH_SOURCE_ROOT, FILES_TO_TEST_WITH)
     mdb.build_page_ref_mappings()
     mdb.publish_markdown(PUBLISH_DIRECTORY)     # <- by this method too
+    mdb.publish_attachments()
     #output exceptions
 
 

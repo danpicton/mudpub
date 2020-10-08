@@ -64,3 +64,6 @@ class MarkdownBase:
 
     def build_page_ref_mappings(self):
         pass
+
+    def publish_attachments(self):
+        pass
