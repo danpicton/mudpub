@@ -61,3 +61,6 @@ class MarkdownBase:
         pt.write_markdown()
         #
         print()
+
+    def build_page_ref_mappings(self):
+        pass

@@ -19,6 +19,7 @@ def main():
     mdb = markdownbase.MarkdownBase(PUBLISH_SOURCE_ROOT)
     mdb.index_files(FILES_TO_TEST_WITH)  # this will feed build_page_models
     mdb.build_page_models(PUBLISH_SOURCE_ROOT, FILES_TO_TEST_WITH)
+    mdb.build_page_ref_mappings()
     mdb.publish_markdown(PUBLISH_DIRECTORY)     # <- by this method too
     #output exceptions
 
