@@ -44,7 +44,7 @@ class MarkdownBase:
             mdp = markdownpage.MarkdownPage(md)
             mdp.build_file_model()
             self.md_files.append(mdp)
-            mdp.convert_file_model()
+            mdp.convert_file_model() # this might need dead links cleaned, in which case, it should be moved
 
     def build_publish_dict(self):
         publish_dict = {} # TODO: create a PublishTarget class
