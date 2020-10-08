@@ -40,22 +40,6 @@ class MarkdownPage:
         self.check_for_wikilinks()
         self.collect_references()
 
-    def convert_file_model(self):
-        """Converts modelled markdown file to publish state."""
-        # to be run after all markdown models are built (will require dead link removal)
-
-        # replace local links
-        for pkm_link in self.md_links:
-            if pkm_link.is_local_ref():
-                print()
-                self.replace_local_link(pkm_link)
-
-        # replace local images refs (point to /attachments/...)
-        for pkm_image in self.md_images:
-            if pkm_image.is_local_ref():
-                print()
-                self.replace_local_image(pkm_image, "attachments")
-
     def parse_frontmatter(self):
         """
         Splits md file into frontmatter and body.
@@ -114,6 +98,22 @@ class MarkdownPage:
         filename = os.path.basename(self.md_filename)
         return os.path.splitext(filename.replace(" ", "-").lower())[0]
 
+    def convert_file_model(self):
+        """Converts modelled markdown file to publish state."""
+        # to be run after all markdown models are built (will require dead link removal)
+
+        # replace local links
+        for pkm_link in self.md_links:
+            if pkm_link.is_local_ref():
+                print()
+                self.replace_local_link(pkm_link)
+
+        # replace local images refs (point to /attachments/...)
+        for pkm_image in self.md_images:
+            if pkm_image.is_local_ref():
+                print()
+                self.replace_local_image(pkm_image, "attachments")
+                
     def replace_local_link(self, link_to_replace: str):
         """Replaces markdown link reference with publish reference."""
         link_re = re.escape(link_to_replace.ref_target)
