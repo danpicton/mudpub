@@ -11,7 +11,7 @@ class MarkdownBase:
         self.directory = directory
         self.md_files = []
         self.publish_files = []
-        self.dead_local_refs = {}
+        self.dead_links = []
         # self.dead_web_refs = {}
 
     def index_files(self, specific_pages: [str]):
@@ -46,9 +46,15 @@ class MarkdownBase:
             self.md_files.append(mdp)
             mdp.convert_file_model() # this might need dead links cleaned, in which case, it should be moved
 
+
+    def define_publish_list(self):
+        """Creates list of markdown files to publish."""
+        for pub_file in [md_file for md_file in self.md_files if md_file.publish]:
+            self.publish_files.append(pub_file)
+
     def build_publish_dict(self):
         publish_dict = {} # TODO: create a PublishTarget class
-        for pub_file in [md_file for md_file in self.md_files if md_file.publish]:
+        for pub_file in self.publish_files:
             print("publish: " + pub_file.get_publish_name())
             publish_dict[pub_file.get_publish_name()] = pub_file.dump_markdown()
         return publish_dict
