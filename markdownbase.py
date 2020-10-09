@@ -1,6 +1,8 @@
 import os
 import markdownpage
 import publishtarget
+import sourcefile
+
 
 class MarkdownBase:
     """
@@ -9,22 +11,26 @@ class MarkdownBase:
 
     def __init__(self, directory):
         self.directory = directory
+        self.source_files = []
+        self.source_file_objs = []
         self.md_files = []
         self.publish_files = []
         self.dead_links = []
         # self.dead_web_refs = {}
 
-    def index_files(self, specific_pages: [str]):
-        file_set = set()
+    def index_source(self, source_directory: str = "", specific_pages: [str] = []):
+        source_path = os.path.join(self.directory, source_directory)
 
-        # Understand what this list comprehension is doing.
-        # https://stackoverflow.com/questions/1192978/python-get-relative-path-of-all-files-and-subfolders-in-a-directory
-        files = [os.path.relpath(os.path.join(dirpath, file), self.directory) for (dirpath, dirnames, filenames) in
-                 os.walk(self.directory) for file in filenames]
+        source_filenames = [file for file in os.listdir(source_path)
+                            if os.path.isfile(os.path.join(source_path, file))]
 
-        for file in files:
-            if file in specific_pages:
-                print(file)
+        for filename in source_filenames:
+            self.source_file_objs.append(sourcefile.SourceFile(self.directory, os.path.join(source_directory, filename)))
+            if len(specific_pages) > 0:
+                if filename in specific_pages:
+                    self.source_files.append(filename)
+            else:
+                self.source_files.append(filename)
 
         # for dirName, subdirList, fileList in os.walk(self.directory):
         #
