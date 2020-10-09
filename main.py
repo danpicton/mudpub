@@ -19,7 +19,7 @@ def main():
 
     mdb = markdownbase.MarkdownBase(PUBLISH_SOURCE_ROOT)
     mdb.index_source(specific_pages=FILES_TO_TEST_WITH)  # this will feed build_page_models
-    mdb.index_source(ATTACHMENTS_DIRECTORY)
+    mdb.index_source(ATTACHMENTS_DIRECTORY) # this can be called for specific files, later, according to links
     mdb.build_page_models()
     mdb.define_publish_list()
     # mdb.convert_local_refs()

@@ -12,35 +12,29 @@ class MarkdownBase:
     def __init__(self, directory):
         self.directory = directory
         self.source_files = []
-        self.source_file_objs = []
         self.md_files = []
         self.publish_files = []
         self.dead_links = []
         # self.dead_web_refs = {}
 
     def index_source(self, source_directory: str = "", specific_pages: [str] = []):
+        """
+        Indexes source directory.
+
+        Defaults to self.directory; specific filenames can be provided as string list
+        """
         source_path = os.path.join(self.directory, source_directory)
 
         source_filenames = [file for file in os.listdir(source_path)
                             if os.path.isfile(os.path.join(source_path, file))]
 
         for filename in source_filenames:
-            self.source_file_objs.append(sourcefile.SourceFile(self.directory, os.path.join(source_directory, filename)))
-            if len(specific_pages) > 0:
-                if filename in specific_pages:
-                    self.source_files.append(filename)
-            else:
-                self.source_files.append(filename)
 
-        # for dirName, subdirList, fileList in os.walk(self.directory):
-        #
-        #     print('Found directory: %s' % dirName)
-        #     for fname in fileList:
-        #         rel_dir = os.path.relpath(dirName, self.directory)
-        #         rel_file = os.path.join(rel_dir, fname)
-        #         file_set.add(rel_file)
-        #         print('\t%s\t%s' % (dirName, fname))
-        #         print(rel_file)
+            if len(specific_pages) > 0:
+                if filename not in specific_pages:
+                    continue
+
+            self.source_files.append(sourcefile.SourceFile(self.directory, os.path.join(source_directory, filename)))
 
     def build_page_models(self, publish_root, file_list):
 
