@@ -113,7 +113,7 @@ class MarkdownPage:
             if pkm_image.is_local_ref():
                 print()
                 self.replace_local_image(pkm_image, "attachments")
-                
+
     def replace_local_link(self, link_to_replace: str):
         """Replaces markdown link reference with publish reference."""
         link_re = re.escape(link_to_replace.ref_target)
