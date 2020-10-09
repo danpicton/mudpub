@@ -6,6 +6,7 @@ Copies and modifies markdown notes to publish to a [GoHugo](https://gohugo.io) s
 - Only markdown files from the specified directory will be published (no subfolders)
 - Attachments will be sourced from markdown directory, or its attachments sub directory
 - All attachments are published to an attachments directory in Hugo's root content folder
+- Written to run on POSIX systems
 - Publishes to Hugo's [content](https://gohugo.io/content-management/organization/) folder only (at present)
 
 ## Todo
