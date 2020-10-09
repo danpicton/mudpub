@@ -48,7 +48,7 @@ class MarkdownBase:
 
 
     def define_publish_list(self):
-        """Creates list of markdown files to publish."""
+        """Creates list of MarkDownPage objects to publish."""
         for pub_file in [md_file for md_file in self.md_files if md_file.publish]:
             self.publish_files.append(pub_file)
 
