@@ -17,7 +17,7 @@ class MarkdownBase:
         self.dead_links = []
         # self.dead_web_refs = {}
 
-    def index_source(self, source_directory: str = "", specific_pages: [str] = []):
+    def index_source(self, source_directory: str = "", specific_pages: [str] = []) -> None:
         """
         Indexes source directory.
 
@@ -36,16 +36,17 @@ class MarkdownBase:
 
             self.source_files.append(sourcefile.SourceFile(self.directory, os.path.join(source_directory, filename)))
 
-    def build_page_models(self, publish_root, file_list):
+    def build_page_models(self) -> None:
+        """
+        Builds list of MarkdownPage objects.
+        """
+        full_file_path = [file.full_path for file in self.source_files]
 
-        parseme = [os.path.join(publish_root, f) for f in file_list]  # will ultimately use all files if !file_list
-
-        for md in parseme:
+        for md in full_file_path:
             mdp = markdownpage.MarkdownPage(md)
             mdp.build_file_model()
             self.md_files.append(mdp)
-            mdp.convert_file_model() # this might need dead links cleaned, in which case, it should be moved
-
+            # mdp.convert_local_refs()  # this might need dead links cleaned, in which case, it should be moved
 
     def define_publish_list(self):
         """Creates list of MarkDownPage objects to publish."""
