@@ -9,6 +9,7 @@ import markdownpage
 
 # properties
 PUBLISH_SOURCE_ROOT = "/home/dan/Documents/pkm/ever-nearly-ready"
+ATTACHMENTS_DIRECTORY = "attachments"
 FILES_TO_TEST_WITH = ["Landscaping my website.md", "Digital Gardens.md"]
 HUGO_GIT_PATH = "/home/dan/projects/temp_python/ape-in-progress"
 PUBLISH_DIRECTORY = "/home/dan/projects/temp_python/pub1"
