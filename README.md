@@ -11,6 +11,8 @@ Copies and modifies markdown notes to publish to a [GoHugo](https://gohugo.io) s
 
 ## Todo
 - [ ] Remove invalid links
+- [ ] Index publish target directory (`path.walk`, not `listdir`)
+- [ ] Ensure links to previously published sub-folder pages are not deactivated/cleansed
 - [ ] Automate git staging
 - [ ] Add formatted git diffs to Chronolog
 - [ ] Accommodate sub-folder publish targets
