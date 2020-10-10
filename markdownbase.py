@@ -38,7 +38,7 @@ class MarkdownBase:
 
     def build_page_models(self) -> None:
         """
-        Builds list of MarkdownPage objects.
+        Builds list of all MarkdownPage objects in self.directory.
         """
         markdown_sourcefile = [file for file in self.source_files if file.file_suffix == ".md"]
 
@@ -47,6 +47,47 @@ class MarkdownBase:
             mdp.model_pages()
             self.md_files.append(mdp)
             # mdp.convert_local_refs()  # this might need dead links cleaned, in which case, it should be moved
+
+    def is_dead_link(self, link_to_check: str) -> bool:
+        """
+        Determines if link_to_check has a valid target.
+        """
+        if link_to_check in self.dead_links:
+            return True
+
+        if link_to_check.ref_target not in [pubfile.source_file.linkified_name for pubfile in self.publish_files]:
+            self.dead_links.append(link_to_check)
+            return True
+
+    def collate_dead_links(self) -> dict:
+        """
+        Returns dict mapping of SourceFile-to-publish to any dead Links.
+        """
+        page_dead_links = {}
+
+        for pub_file in self.publish_files:
+            dead_links = []
+
+            for link in [links for links in pub_file.body_links if links.is_local_ref()]:
+                if self.is_dead_link(link):
+                    dead_links.append(link)
+
+            if len(dead_links) > 0:
+                page_dead_links[pub_file] = dead_links
+
+        return page_dead_links
+
+    def deactivate_dead_links(self, dead_links: dict):
+        """
+        Deactivates dead links.
+        """
+        for markdown_page, dead_links in dead_links.items():
+            for link in dead_links:
+                print(f"remove from {markdown_page.source_file.filename}: {link.ref_target}")
+
+    def sanitise_dead_links(self):
+        self.deactivate_dead_links(self.collate_dead_links())
+
 
     def define_publish_list(self):
         """Filters md_files' MarkdownPage objects leaving only those  publish."""
@@ -77,22 +118,4 @@ class MarkdownBase:
     def publish_attachments(self):
         pass
 
-    def is_dead_link(self, link_to_check: str) -> bool:
-        if link_to_check in self.dead_links:
-            return True
 
-        if link_to_check.ref_target not in [pubfile.source_file.linkified_name for pubfile in self.publish_files]:
-            self.dead_links.append(link_to_check)
-            return True
-
-    def sanitise_dead_links(self):
-        deadlinks = {}
-
-        # for publish_filename in self.md_files.
-        for pub_file in self.publish_files:
-            for link in [links for links in pub_file.body_links if links.is_local_ref()]:
-                if self.is_dead_link(link):
-                    print("dead: " + link.ref_target)
-                else:
-                    print("live: " + link.ref_target)
-        pass
