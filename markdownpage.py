@@ -4,6 +4,7 @@ import logging
 import markdown
 from lxml import etree
 import link, image
+import sourcefile
 import re
 import os
 
@@ -25,16 +26,16 @@ class MarkdownPage:
 
     REQUIRED_FRONT_MATTER_KEYS = set(["title", "publish"]) # TODO: Review these
 
-    def __init__(self, markdown_file: str):
-        self.md_filename = markdown_file
-        self.md_frontmatter = {}
-        self.md_links = []
-        self.md_images = []
+    def __init__(self, markdown_file: sourcefile.SourceFile):
+        self.source_file = markdown_file
+        self.frontmatter = {}
+        self.body_links = []
+        self.body_images = []
         self.parse_exceptions = [] # deadlinks, bad yaml, no content, contains wikilinks, unexpected local file suffix,
-        self.md_body = ""
+        self.body_text = ""
         self.publish = False
 
-    def build_file_model(self):
+    def model_pages(self):
         """Reads in markdown file as MarkDownPage object."""
         self.parse_frontmatter()
         self.check_for_wikilinks()
@@ -46,20 +47,20 @@ class MarkdownPage:
 
         Reads publish flag from YAML and sets self.publish accordingly.
         """
-        page_to_parse = frontmatter.load(self.md_filename)
+        page_to_parse = frontmatter.load(self.source_file.full_path)
 
         if not self.is_valid_front_matter(page_to_parse):
             self.parse_exceptions.append("Invalid YAML front matter")
         else:
-            self.md_frontmatter = page_to_parse.metadata
-            self.md_body = page_to_parse.content
+            self.frontmatter = page_to_parse.metadata
+            self.body_text = page_to_parse.content
 
-            if self.md_frontmatter.get("publish"):
+            if self.frontmatter.get("publish"):
                 self.publish = True
 
     def dump_markdown(self) -> str:
-        """Outputs md_frontmatter and md_body as .md file with YAML front matter."""
-        post = frontmatter.Post(self.md_body, None, **self.md_frontmatter)
+        """Outputs frontmatter and body_text as .md file with YAML front matter."""
+        post = frontmatter.Post(self.body_text, None, **self.frontmatter)
         markdown_file = frontmatter.dumps(post)
         
         return markdown_file
@@ -74,59 +75,57 @@ class MarkdownPage:
         Checks for [[WikiLinks]] and adds an exception.
         """
         wl_re = re.compile(r"\[\[[\w0-9_ -]+\]\]")
-        if re.findall(wl_re, self.md_body):
+        if re.findall(wl_re, self.body_text):
             self.parse_exceptions.append("WikiLinks in markdown body")
 
     def collect_references(self):
         """Populates the pkm (local) references (links and images)."""
 
-        markdownbody = markdown.markdown(self.md_body)
+        markdownbody = markdown.markdown(self.body_text)
         # markdownbody = markdown.markdown(page_to_validate.content, extensions=['wikilinks'])
 
         doc = etree.fromstring(markdownbody, etree.HTMLParser())
 
         # collect links
         for link_element in doc.xpath('//a'):
-            self.md_links.append(link.Link(link_element))
+            self.body_links.append(link.Link(link_element))
 
         # collect images
         for image_element in doc.xpath('//img'):
-            self.md_images.append(image.Image(image_element))
+            self.body_images.append(image.Image(image_element))
 
     def get_publish_name(self):
         """Returns the slug under which page will be published."""
-        filename = os.path.basename(self.md_filename)
-        return os.path.splitext(filename.replace(" ", "-").lower())[0]
+        # filename = os.path.basename(self.source_file)
+        return os.path.splitext(self.source_file.filename.replace(" ", "-").lower())[0]
 
-    def convert_file_model(self):
-        """Converts modelled markdown file to publish state."""
+    def convert_local_refs(self):
+        """Converts modelled markdown file's references for publishing."""
         # to be run after all markdown models are built (will require dead link removal)
 
         # replace local links
-        for pkm_link in self.md_links:
+        for pkm_link in self.body_links:
             if pkm_link.is_local_ref():
-                print()
                 self.replace_local_link(pkm_link)
 
         # replace local images refs (point to /attachments/...)
-        for pkm_image in self.md_images:
+        for pkm_image in self.body_images:
             if pkm_image.is_local_ref():
-                print()
                 self.replace_local_image(pkm_image, "attachments")
 
     def replace_local_link(self, link_to_replace: str):
         """Replaces markdown link reference with publish reference."""
         link_re = re.escape(link_to_replace.ref_target)
         pr = link_to_replace.get_publish_ref()
-        self.md_body = re.sub(link_re, pr, self.md_body, re.MULTILINE)
-        print(self.md_body)
+        self.body_text = re.sub(link_re, pr, self.body_text, re.MULTILINE)
+        print(self.body_text)
 
     def replace_local_image(self, link_to_replace, page_slug=""):
         """Replaces markdown image reference with publish reference."""
         link_re = re.escape(link_to_replace.ref_target)
         pr = link_to_replace.get_publish_ref(page_slug, True)
-        self.md_body = re.sub(link_re, pr, self.md_body, re.MULTILINE)
-        print(self.md_body)
+        self.body_text = re.sub(link_re, pr, self.body_text, re.MULTILINE)
+        print(self.body_text)
 
     # create backlinks (graph traversal)
     # create custom extension for wikilinked images
