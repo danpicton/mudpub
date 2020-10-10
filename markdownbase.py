@@ -102,7 +102,6 @@ class MarkdownBase:
         publish_dict = {}  # TODO: create a PublishTarget class
         for pub_file in self.publish_files:
             pub_file.convert_local_refs()
-            print("publish: " + pub_file.get_publish_name())
             publish_dict[pub_file.get_publish_name()] = pub_file.dump_markdown()
         return publish_dict
 
@@ -112,8 +111,6 @@ class MarkdownBase:
         pt.define_publish_target(publish_dict)
         pt.create_publish_structure()
         pt.write_markdown()
-        #
-        print()
 
     def publish_attachments(self):
         pass

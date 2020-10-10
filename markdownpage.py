@@ -118,14 +118,12 @@ class MarkdownPage:
         link_re = re.escape(link_to_replace.ref_target)
         pr = link_to_replace.get_publish_ref()
         self.body_text = re.sub(link_re, pr, self.body_text, re.MULTILINE)
-        print(self.body_text)
 
     def replace_local_image(self, link_to_replace, page_slug=""):
         """Replaces markdown image reference with publish reference."""
         link_re = re.escape(link_to_replace.ref_target)
         pr = link_to_replace.get_publish_ref(page_slug, True)
         self.body_text = re.sub(link_re, pr, self.body_text, re.MULTILINE)
-        print(self.body_text)
 
     # create backlinks (graph traversal)
     # create custom extension for wikilinked images
