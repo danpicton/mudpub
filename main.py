@@ -13,6 +13,7 @@ ATTACHMENTS_DIRECTORY = "attachments" # path relative to PUBLISH_SOURCE_ROOT
 FILES_TO_TEST_WITH = ["Landscaping my website.md", "Digital Gardens.md"]
 HUGO_GIT_PATH = "/home/dan/projects/temp_python/ape-in-progress"
 PUBLISH_DIRECTORY = "/home/dan/projects/temp_python/pub1"
+DEAD_LINK_NOTE = "https://github.com/danpicton/mudpub/blob/main/README.md#selective-publication"
 
 def main():
     logging.basicConfig(level=logging.INFO)
