@@ -16,6 +16,7 @@ class MarkdownBase:
         self.md_files = []
         self.publish_files = []
         self.dead_links = []
+        self.dead_link_note = "" # this will be passed through as properties
         # self.dead_web_refs = {}
 
     def index_source(self, source_directory: str = "", specific_pages: [str] = []) -> None:
@@ -84,14 +85,18 @@ class MarkdownBase:
         """
         for markdown_page, dead_links in dead_links.items():
             for link in dead_links:
+                if len(self.dead_link_note) > 0:
+                    replacement_text = f"_{link.text}_[*]({self.dead_link_note})"
+                else:
+                    replacement_text = f"_{link.text}_)"
                 link_regex = re.compile(rf"\[{link.text}\]\({link.ref_target}\)")
                 # link_regex = re.compile(rf"\[.*{link.text}.*\]\(.*{link.ref_target}.*\)")
-                match = re.sub(link_regex, "REPLACEMENT", markdown_page.body_text)
+                match = re.sub(link_regex, replacement_text, markdown_page.body_text)
                 print(f"remove from {markdown_page.source_file.filename}: {link.ref_target}")
 
-    def sanitise_dead_links(self):
+    def sanitise_dead_links(self, dead_link_note):
+        self.dead_link_note = dead_link_note
         self.deactivate_dead_links(self.collate_dead_links())
-
 
     def define_publish_list(self):
         """Filters md_files' MarkdownPage objects leaving only those  publish."""
