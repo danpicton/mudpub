@@ -91,8 +91,9 @@ class MarkdownBase:
                     replacement_text = f"_{link.text}_)"
                 link_regex = re.compile(rf"\[{link.text}\]\({link.ref_target}\)")
                 # link_regex = re.compile(rf"\[.*{link.text}.*\]\(.*{link.ref_target}.*\)")
-                match = re.sub(link_regex, replacement_text, markdown_page.body_text)
+                new_body_text = re.sub(link_regex, replacement_text, markdown_page.body_text)
                 print(f"remove from {markdown_page.source_file.filename}: {link.ref_target}")
+                markdown_page.body_text = new_body_text
 
     def sanitise_dead_links(self, dead_link_note):
         self.dead_link_note = dead_link_note
