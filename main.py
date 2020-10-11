@@ -24,7 +24,7 @@ def main():
     mdb.build_page_models()
     mdb.define_publish_list()
     # mdb.convert_local_refs()
-    mdb.sanitise_dead_links()
+    mdb.sanitise_dead_links(DEAD_LINK_NOTE)
     mdb.publish_markdown(PUBLISH_DIRECTORY)     # <- by this method too
     mdb.publish_attachments()
     #output exceptions
