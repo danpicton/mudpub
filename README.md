@@ -16,7 +16,8 @@ some local links leading nowhere (i.e. the referenced page isn't published). Lin
 to publishing and look like this: _old link text_[*](https://github.com/danpicton/mudpub/blob/main/README.md#selective-publication)
 
 ## Todo
-- [ ] Remove invalid links
+- [x] Remove invalid local links
+- [ ] Publish attachments
 - [ ] Index publish target directory (`path.walk`, not `listdir`)
 - [ ] Ensure links to previously published sub-folder pages are not deactivated/cleansed
 - [ ] Automate git staging
