@@ -9,6 +9,12 @@ Copies and modifies markdown notes to publish to a [GoHugo](https://gohugo.io) s
 - Written to run on POSIX systems
 - Publishes to Hugo's [content](https://gohugo.io/content-management/organization/) folder only (at present)
 
+## Features
+### Selective Publication
+Pages will be published only of they have valid YAML front-matter and configured with `publish: yes`. This results in
+some local links leading nowhere (i.e. the referenced page isn't published). Links to such pages are deactivated prior
+to publishing and look like this: _old link text_[*](https://github.com/danpicton/mudpub/blob/main/README.md#selective-publication)
+
 ## Todo
 - [ ] Remove invalid links
 - [ ] Index publish target directory (`path.walk`, not `listdir`)
