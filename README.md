@@ -6,6 +6,7 @@ Copies and modifies markdown notes to publish to a [GoHugo](https://gohugo.io) s
 - Only markdown files from the specified directory will be published (no subfolders)
 - Attachments will be sourced from markdown directory, or a specified attachments sub directory
 - All attachments are published to an attachments directory in Hugo's root content folder
+- Selective publishing does not yet work for attachments 
 - Written to run on POSIX systems
 - Publishes to Hugo's [content](https://gohugo.io/content-management/organization/) folder only (at present)
 
@@ -22,6 +23,7 @@ to publishing and look like this: _old link text_[*](https://github.com/danpicto
 - [ ] Handle errors cleanly
 - [ ] Refactor OO code
 - [ ] Build tests
+- [ ] Enable selective attachment publishing
 - [ ] Index publish target directory (`path.walk`, not `listdir`)
 - [ ] Ensure links to previously published sub-folder pages are not deactivated/cleansed
 - [ ] Automate git staging
