@@ -2,6 +2,7 @@ import os
 import markdownpage
 import publishtarget
 import sourcefile
+import re
 
 
 class MarkdownBase:
