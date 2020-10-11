@@ -15,6 +15,7 @@ HUGO_GIT_PATH = "/home/dan/projects/temp_python/ape-in-progress"
 PUBLISH_DIRECTORY = "/home/dan/projects/temp_python/pub1"
 DEAD_LINK_NOTE = "https://github.com/danpicton/mudpub/blob/main/README.md#selective-publication"
 
+
 def main():
     logging.basicConfig(level=logging.INFO)
 
@@ -28,13 +29,6 @@ def main():
     mdb.publish_markdown(PUBLISH_DIRECTORY)     # <- by this method too
     mdb.publish_attachments()
     #output exceptions
-
-
-def split_yaml_md():
-
-
-    page = frontmatter.load(filename)
-    print(markdown.markdown(page.content))
 
 
 if __name__ == '__main__':
