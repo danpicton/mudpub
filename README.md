@@ -18,6 +18,10 @@ to publishing and look like this: _old link text_[*](https://github.com/danpicto
 ## Todo
 - [x] Remove invalid local links
 - [ ] Publish attachments
+- [ ] Add logging throughout
+- [ ] Handle errors cleanly
+- [ ] Refactor OO code
+- [ ] Build tests
 - [ ] Index publish target directory (`path.walk`, not `listdir`)
 - [ ] Ensure links to previously published sub-folder pages are not deactivated/cleansed
 - [ ] Automate git staging
