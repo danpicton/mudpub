@@ -6,17 +6,22 @@ import markdown
 import markdownbase
 import frontmatter
 import markdownpage
-import configparser
+import argparse
 
+parser = argparse.ArgumentParser(description='Publish a directory of markdown files.')
+parser.add_argument('source', type=str, nargs=1, help='source markdown directory' )
+parser.add_argument('--attachments', type=str, nargs=1, help='source attachments directory')
+parser.add_argument('--files', type=str, nargs='+', help='specific files to publish')
+parser.add_argument('publish', type=str, nargs=1, help='target publish directory')
 
 # properties
-config = configparser.ConfigParser()
-config["PUBLISH_SOURCE_ROOT"] = "/home/dan/Documents/pkm/ever-nearly-ready"
-config["ATTACHMENTS_DIRECTORY"] = "attachments"  # path relative to PUBLISH_SOURCE_ROOT
-config["FILES_TO_TEST_WITH"] = ["Landscaping my website.md", "Digital Gardens.md"]
-config["HUGO_GIT_PATH"] = "/home/dan/projects/temp_python/ape-in-progress"
-config["PUBLISH_DIRECTORY"] = "/home/dan/projects/temp_python/pub1"
-config["DEAD_LINK_NOTE"] = "https://github.com/danpicton/mudpub/blob/main/README.md#selective-publication"
+# config = configparser.ConfigParser()
+# config["PUBLISH_SOURCE_ROOT"] = "/home/dan/Documents/pkm/ever-nearly-ready"
+# config["ATTACHMENTS_DIRECTORY"] = "attachments"  # path relative to PUBLISH_SOURCE_ROOT
+# config["FILES_TO_TEST_WITH"] = ["Landscaping my website.md", "Digital Gardens.md"]
+# config["HUGO_GIT_PATH"] = "/home/dan/projects/temp_python/ape-in-progress"
+# config["PUBLISH_DIRECTORY"] = "/home/dan/projects/temp_python/pub1"
+# config["DEAD_LINK_NOTE"] = "https://github.com/danpicton/mudpub/blob/main/README.md#selective-publication"
 
 
 def main():
