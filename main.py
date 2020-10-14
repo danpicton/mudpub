@@ -8,11 +8,6 @@ import frontmatter
 import markdownpage
 import argparse
 
-parser = argparse.ArgumentParser(description='Publish a directory of markdown files.')
-parser.add_argument('source', type=str, nargs=1, help='source markdown directory' )
-parser.add_argument('--attachments', type=str, nargs=1, help='source attachments directory')
-parser.add_argument('--files', type=str, nargs='+', help='specific files to publish')
-parser.add_argument('publish', type=str, nargs=1, help='target publish directory')
 
 # properties
 # config = configparser.ConfigParser()
@@ -26,6 +21,12 @@ parser.add_argument('publish', type=str, nargs=1, help='target publish directory
 
 def main():
     logging.basicConfig(level=logging.INFO)
+
+    parser = argparse.ArgumentParser(description='Publish a directory of markdown files.')
+    parser.add_argument('source', type=str, nargs=1, help='source markdown directory')
+    parser.add_argument('--attachments', type=str, nargs=1, help='source attachments directory')
+    parser.add_argument('--files', type=str, nargs='+', help='specific files to publish')
+    parser.add_argument('publish', type=str, nargs=1, help='target publish directory')
 
     mdb = markdownbase.MarkdownBase(PUBLISH_SOURCE_ROOT)
     mdb.index_source(specific_pages=FILES_TO_TEST_WITH)  # this will feed build_page_models
