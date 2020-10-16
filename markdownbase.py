@@ -107,21 +107,16 @@ class MarkdownBase:
         for pub_file in [md_file for md_file in self.md_files if md_file.publish]:
             self.publish_files.append(pub_file)
 
-    def build_publish_dict(self):
-        publish_dict = {}  # TODO: create a PublishTarget class
-        for pub_file in self.publish_files:
-            pub_file.convert_local_refs()
-            publish_dict[pub_file.get_publish_name()] = pub_file.dump_markdown()
-        return publish_dict
+    def create_publish_target(self, pub_path: str):
+        # TODO: Only publish attachments for published pages (parse published pages to find)
+        attachments = [file for file in self.source_files if file.file_suffix != ".md"]
 
-    def publish_markdown(self, pub_path: str):
-        publish_dict = self.build_publish_dict()
-        pt = publishtarget.PublishTarget(pub_path)
-        pt.define_publish_target(publish_dict)
-        pt.create_publish_structure()
-        pt.write_markdown()
+        return publishtarget.PublishTarget(pub_path, self.publish_files, attachments)
 
-    def publish_attachments(self):
-        pass
+
+
+
+
+
 
 

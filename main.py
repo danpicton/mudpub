@@ -31,8 +31,9 @@ def main():
     mdb.define_publish_list()
     # mdb.convert_local_refs()
     mdb.sanitise_dead_links(args.deadurl)
-    mdb.publish_markdown(args.publish)  # <- by this method too
-    mdb.publish_attachments()
+    publish_target = mdb.create_publish_target(args.publish)
+    publish_target.publish_markdown()  # <- by this method too
+    publish_target.publish_attachments()
     # output exceptions
 
 
