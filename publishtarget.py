@@ -1,5 +1,6 @@
 import os
 
+
 class PublishTarget:
     """
     A class representing a target directory for publishing to.
