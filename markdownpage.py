@@ -38,8 +38,9 @@ class MarkdownPage:
     def model_pages(self):
         """Reads in markdown file as MarkDownPage object."""
         self.parse_frontmatter()
-        self.check_for_wikilinks()
-        self.collect_references()
+        if self.publish:
+            self.check_for_wikilinks()
+            self.collect_references()
 
     def parse_frontmatter(self):
         """
