@@ -17,7 +17,6 @@ class MarkdownBase:
         self.publish_files = []
         self.dead_links = []
         self.dead_link_note = "" # this will be passed through as properties
-        # self.dead_web_refs = {}
 
     def index_source(self, source_directory: str = "", specific_pages: [str] = []) -> None:
         """
