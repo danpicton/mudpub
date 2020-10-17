@@ -1,10 +1,12 @@
 import os
-
+import shutil
 
 class PublishTarget:
     """
     A class representing a target directory for publishing to.
     """
+
+    ATTACHMENTS_DIR = "attachments" # sits in publish_directory
 
     def __init__(self, publish_directory, publish_files, publish_attachments):
         self.publish_directory = publish_directory
@@ -19,8 +21,8 @@ class PublishTarget:
         if not os.path.exists(self.publish_directory):
             os.mkdir(self.publish_directory)
 
-        if not os.path.exists(os.path.join(self.publish_directory, "attachments")):
-            os.mkdir(os.path.join(self.publish_directory, "attachments"))
+        if not os.path.exists(os.path.join(self.publish_directory, self.ATTACHMENTS_DIR)):
+            os.mkdir(os.path.join(self.publish_directory, self.ATTACHMENTS_DIR))
 
         for subfolder in self.publish_target.keys():
             dir_to_create = os.path.join(self.publish_directory, subfolder)
@@ -49,4 +51,6 @@ class PublishTarget:
 
     def publish_attachments(self):
         for attachment in self.attachments:
-            print(attachment.filename)
+            source_path = attachment.full_path
+            publish_path = os.path.join(self.publish_directory, self.ATTACHMENTS_DIR, attachment.filename)
+            shutil.copy(source_path, publish_path)

@@ -18,7 +18,9 @@ to publishing and look like this: _old link text_[*](https://github.com/danpicto
 
 ## Todo
 - [x] Remove invalid local links
-- [ ] Publish attachments
+- [x] Publish attachments
+- [ ] Output exceptions
+- [ ] Only allow alpha chars and spaces in publish names
 - [ ] Add logging throughout
 - [ ] Handle errors cleanly
 - [ ] Refactor OO code
