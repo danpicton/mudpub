@@ -98,7 +98,7 @@ class MarkdownPage:
     def get_publish_name(self):
         """Returns the slug under which page will be published."""
         # filename = os.path.basename(self.source_file)
-        az_target = re.sub(r'[^A-Za-z0-9 .%]+', '', self.source_file.filename).lower()
+        az_target = re.sub(r'[^A-Za-z0-9 .%_\\]+', '', self.source_file.filename).lower()
         return os.path.splitext(az_target.replace(" ", "-"))[0]
 
     def convert_local_refs(self):
@@ -125,6 +125,7 @@ class MarkdownPage:
         """Replaces markdown image reference with publish reference."""
         link_re = re.escape(link_to_replace.ref_target)
         pr = link_to_replace.get_publish_ref(page_slug, True)
+        # pr = link_to_replace.get_publish_ref(page_slug, True)
         self.body_text = re.sub(link_re, pr, self.body_text, re.MULTILINE)
 
     # create backlinks (graph traversal)
