@@ -35,7 +35,7 @@ def main():
     publish_target.publish_markdown()  # <- by this method too
     publish_target.publish_attachments()
     # output exceptions
-
+    mdb.output_exceptions()
 
 if __name__ == '__main__':
     main()

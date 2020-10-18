@@ -113,6 +113,14 @@ class MarkdownBase:
 
         return publishtarget.PublishTarget(pub_path, self.publish_files, attachments)
 
+    def output_exceptions(self, publish=False):
+
+        for file in [files for files in self.md_files if files.publish == publish and len(files.parse_exceptions) > 0]:
+            print(file.source_file.filename)
+            for exception in file.parse_exceptions:
+                print(f'- {exception}')
+
+
 
 
 
