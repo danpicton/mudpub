@@ -98,7 +98,8 @@ class MarkdownPage:
     def get_publish_name(self):
         """Returns the slug under which page will be published."""
         # filename = os.path.basename(self.source_file)
-        return os.path.splitext(self.source_file.filename.replace(" ", "-").lower())[0]
+        az_target = re.sub(r'[^A-Za-z0-9 .]+', '', self.source_file.filename).lower()
+        return os.path.splitext(az_target.replace(" ", "-"))[0]
 
     def convert_local_refs(self):
         """Converts modelled markdown file's references for publishing."""

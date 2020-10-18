@@ -24,10 +24,11 @@ class Reference:
 
         Removes reference suffix by default.
         """
+        az_target = re.sub(r'[^A-Za-z0-9 .]+', '', self.ref_target).lower()
         if preserve_extension:
-            return os.path.join(os.path.sep, directory, self.ref_target.replace("%20", "-").lower())
+            return os.path.join(os.path.sep, directory, az_target.replace("%20", "-"))
         else:
-            ref_prefix = os.path.splitext(self.ref_target.replace("%20", "-").lower())[0]
+            ref_prefix = os.path.splitext(az_target.replace("%20", "-"))[0]
             return os.path.join(os.path.sep, directory, ref_prefix)
 
     def is_local_ref(self) -> bool:
