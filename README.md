@@ -21,6 +21,7 @@ to publishing and look like this: _old link text_[*](https://github.com/danpicto
 - [x] Publish attachments
 - [x] Output exceptions
 - [x] Only allow alpha chars and spaces in publish names
+- [ ] Refactor to run as command line app
 - [ ] Ensure local links have `.md` suffix
 - [ ] Add deactivated links to parse exceptions
 - [ ] Add logging throughout
