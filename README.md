@@ -1,6 +1,25 @@
 # mudpub - Markdown Note Publisher
 Copies and modifies markdown notes to publish to a [GoHugo](https://gohugo.io) static site.
 
+## Add as CLI tool
+1. Create folder `~/.local/bin`:  
+`mkdir ~/.local/bin`
+2. Add `mudpub` file to `~/.local/bin` with contents:  
+    ```
+    #!/usr/bin/env bash
+    source /home/username/path/to/mudpub/venv/bin/activate
+    /usr/bin/env python3 /home/username/path/to/mudpub/mudpub.py
+    ```
+3. Change `mudpub` permissions:  
+   `chmod u+x mudpub`
+4. Add `~/.local/bin` to `PATH` in `~/.profile`:  
+    ```
+    # set PATH so it includes user's private bin if it exists
+    if [ -d "$HOME/.local/bin" ] ; then
+        PATH="$HOME/.local/bin:$PATH"
+    fi
+    ```
+
 ## Notes
 - All external links should be qualified with the protocol `https://` or `http://`
 - Only markdown files from the specified directory will be published (no subfolders)
